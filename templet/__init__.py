@@ -36,6 +36,14 @@ def handle_project(src, dst, template_data):
     copy(src, dst)
     dirs_to_rename = []
     for root, dirs, files in os.walk(dst):
+        for d in dirs:
+            dirpath = os.path.join(root, d)
+            if os.path.basename(dirpath).startswith('{{') \
+                and os.path.basename(dirpath).endswith('}}'):
+
+                new_dirpath = expand_vars_in_file_name(dirpath, template_data)
+                move(dirpath, new_dirpath)
+
         for f in files:
             filepath = os.path.join(root, f)
             if os.path.isfile(filepath):
