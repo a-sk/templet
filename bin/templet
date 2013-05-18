@@ -41,7 +41,7 @@ def get_project_path(template):
         return template
     cfg_path = os.path.expandvars('$HOME/.config/templet/config.ini')
     if os.path.exists(cfg_path):
-        with open(cfg_path) as fp
+        with open(cfg_path) as fp:
             cfg = iniparse.INIConfig(fp.read())
         if isinsance(cfg.template, iniparse.config.Undefined):
             return
