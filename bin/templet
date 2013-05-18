@@ -1,0 +1,35 @@
+#!/usr/bin/env python2
+# coding=utf8
+import argparse
+import json
+
+# local imports
+import templet
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Templet')
+    parser.add_argument('name', nargs=1, help='Project name')
+    parser.add_argument('-t', '--template', nargs=1, metavar='template',
+                                 help='Name of predifind template or full path to template folder')
+    parser.add_argument('-v', '--vars', nargs=1, metavar='var',
+                                 help='Project variables')
+    parser.add_argument('-V', '--vars-from-file', nargs=1, metavar='path',
+                                 help='Read project variables from json file')
+    return (vars(parser.parse_args()), parser)
+
+def parse_vars_from_cli(vars):
+    """Parse project variables defined in format 'var=value'
+    :arg: vars - str
+    :return: dict"""
+
+    pass
+
+
+def main():
+    args, parser = parse_args()
+
+
+if __name__ == "__main__":
+    main()
+
