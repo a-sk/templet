@@ -20,7 +20,7 @@ packages = [
 
 
 requires = [
-    'Temptia >= 0.5.1',
+    'Jinja2 >= 2.6',
     'iniparse >= 0.4'
 ]
 
