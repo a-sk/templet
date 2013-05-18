@@ -53,11 +53,12 @@ def get_project_path(template):
 
 def main():
     args, parser = parse_args()
+    print args
 
     vars = {}
     if args['vars']:
         vars = parse_vars_from_cli(args['vars'])
-    if args['vars-from-file']:
+    if args['vars_from_file']:
         vars.update(parse_vars_from_file(args['vars-from-file']))
 
     project_template_path = get_project_path(args['template'])
