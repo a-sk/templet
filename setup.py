@@ -32,7 +32,7 @@ setup(
     author='Alexandr Skurikhin',
     author_email='a@skurih.in',
     url='git://skurih.in/templet.git',
-    scripts=[],
+    scripts=['bin/templet'],
     packages=packages,
     package_data={'': ['LICENSE']},
     install_requires=requires,
