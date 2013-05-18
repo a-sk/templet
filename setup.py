@@ -20,6 +20,8 @@ packages = [
 
 
 requires = [
+    'Temptia >= 0.5.1',
+    'iniparse >= 0.4'
 ]
 
 setup(
