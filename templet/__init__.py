@@ -1,3 +1,4 @@
+import os
 import tempita
 import shutil
 
@@ -6,7 +7,10 @@ __all__ = ['handle_project']
 
 
 def copy(src, dst):
-    shutil.copy(src, dst)
+    if os.path.isfile(src):
+        shutil.copy(src, dst)
+    elif os.path.isdir(src):
+        shutil.copytree(src, dst)
     return dst
 
 
@@ -19,12 +23,12 @@ def expand_vars_in_file(filepath, project_root, template_data):
     with open(filepath) as fp:
         tmpl = tempita.Template(fp.read())
     file_contents = tmpl.substitute(template_data)
-    with open(filepath, 'w', encoding='utf8') as f:
+    with open(filepath, 'w') as f:
         f.write(file_contents)
 
 
 def expand_vars_in_file_name(filepath, template_data):
-    tmpl = tempita.Template(os.path.basename(filepath))
+    tmpl = tempita.Template(filepath)
     return tmpl.substitute(template_data)
 
 
@@ -34,14 +38,12 @@ def handle_project(src, dst, template_data):
     for root, dirs, files in os.walk(dst):
         for f in files:
             filepath = os.path.join(root, f)
-
             if os.path.isfile(filepath):
-                expand_vars_in_file(filepath)
+                expand_vars_in_file(filepath, dst, template_data)
 
-            if filepath.startswith('{{') and filepath.endswith('}}'):
-                # expand vars in file name
-                new_filepath = move(filepath, template_data)
-                # expand vars in dir name, it should be done in the last turn
-                if os.path.isdir(filepath):
-                    move(filepath, template_data)
+            if os.path.basename(filepath).startswith('{{') \
+                and os.path.basename(filepath).endswith('}}'):
+
+                new_filepath = expand_vars_in_file_name(filepath, template_data)
+                move(filepath, new_filepath)
 
