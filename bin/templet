@@ -35,6 +35,7 @@ def parse_vars_from_file(path):
     if os.path.exists(path):
         with open(path) as fp:
             return json.load(fp)
+    return {}
 
 def get_project_template_path(template):
     if os.path.exists(template):
