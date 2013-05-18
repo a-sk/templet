@@ -57,7 +57,10 @@ def main():
 
     vars = {}
     if args['vars']:
-        vars = parse_vars_from_cli(args['vars'][0])
+        try:
+            vars = parse_vars_from_cli(args['vars'][0])
+        except ValueError:
+            print('--vars argument is wrong, skipping variables from cli')
     if args['vars_from_file']:
         vars.update(parse_vars_from_file(args['vars-from-file']))
     vars['PROJECT_NAME'] = args['name'][0]
