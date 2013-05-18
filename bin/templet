@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('name', nargs=1, help='Project name')
     parser.add_argument('-t', '--template', nargs=1, metavar='template',
                                  help='Name of predifind template or full path to template folder')
-    parser.add_argument('-v', '--vars', nargs=1, metavar='var',
+    parser.add_argument('-v', '--vars', nargs=1, metavar='vars',
                                  help='Project variables')
     parser.add_argument('-V', '--vars-from-file', nargs=1, metavar='path',
                                  help='Read project variables from json file')
