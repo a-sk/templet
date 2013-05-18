@@ -62,7 +62,7 @@ def main():
         except ValueError:
             print('--vars argument is wrong, skipping variables from cli')
     if args['vars_from_file']:
-        vars.update(parse_vars_from_file(args['vars-from-file']))
+        vars.update(parse_vars_from_file(args['vars_from_file'][0]))
     vars['PROJECT_NAME'] = args['name'][0]
 
     project_template_path = get_project_template_path(template)
