@@ -63,19 +63,20 @@ def get_project_template_path(template):
 
     if os.path.exists(template):
         return template
+    cfg = load_cfg()
+    if not cfg or 'templates' not in cfg:
+        return
+    if cfg['templates'].get(template):
+        return cfg['templates'][template]
+    if cfg['templates'].get('$PATH'):
+        path = cfg['templates'].get('$PATH')
+        return find_in_path(path, template)
+
+def load_cfg():
     cfg_path = os.path.expandvars('$HOME/.config/templet/config.json')
     if os.path.exists(cfg_path):
         with open(cfg_path) as fp:
-            cfg = json.load(fp)
-        if not cfg.get('templates'):
-            return
-        if cfg['templates'].get(template):
-            return cfg['templates'][template]
-        if cfg['templates'].get('$PATH'):
-            path = cfg['templates'].get('$PATH')
-            template_path = find_in_path(path, template)
-            if template_path:
-                return template_path
+            return json.load(fp)
 
 def find_in_path(path, what_to_find):
     """Do path look up.
