@@ -2,7 +2,7 @@
 Another project generation tool based on templates.
 
 ## Install
-`pip install templet`
+`pip install templet [--user]`
 
 ## Features
 
