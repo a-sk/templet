@@ -14,11 +14,6 @@ def copy(src, dst):
         shutil.copytree(src, dst)
     return dst
 
-def move(src, dst):
-    """Move file or directory from src to dst"""
-    shutil.move(src, dst)
-    return dst
-
 def expand_template(template_content, template_data):
     """Expand template using jinja2 template engine"""
     return jinja2.Template(template_content).render(template_data)
@@ -29,7 +24,7 @@ def maybe_rename(src, template_data):
         and os.path.basename(src).endswith('}}'):
 
         new_path = expand_vars_in_file_name(src, template_data)
-        move(src, new_path)
+        shutil.move(src, new_path)
 
 def expand_vars_in_file(filepath, template_data):
     """Expand variables in file"""
