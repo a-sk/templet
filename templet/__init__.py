@@ -45,7 +45,14 @@ def expand_vars_in_file_name(filepath, template_data):
     return expand_template(filepath, template_data)
 
 def handle_project(src, dst, template_data):
-    """Main templet library function, does all the work"""
+    """Main templet library function, does all the work.
+
+    First copy template directory to current working path, renaming it
+    to `PROJECT_NAME`.
+    Then expand variables in directories names.
+    And in the end, expand variables in files names and it's content.
+    """
+
     copy(src, dst)
     for root, dirs, files in os.walk(dst):
         for d in dirs:
