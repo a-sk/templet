@@ -20,13 +20,12 @@ packages = [
 
 
 requires = [
-    'Jinja2 >= 2.6',
-    'iniparse >= 0.4'
+    'Jinja2 >= 2.6'
 ]
 
 setup(
     name='templet',
-    version='0.0.6',
+    version='0.0.7',
     description='Simple scaffolding tool',
     long_description=open('README.md').read(),
     author='Alexandr Skurikhin',
