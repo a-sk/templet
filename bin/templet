@@ -86,7 +86,7 @@ def get_project_template_path(template):
         return cfg['templates'][template]
     if cfg['templates'].get('$PATH'):
         path = cfg['templates'].get('$PATH')
-        return find_in_path(path, template)
+        return find_dir_in_path(path, template)
 
 def load_cfg():
     cfg_path = os.path.expandvars('$HOME/.config/templet/config.json')
@@ -94,16 +94,18 @@ def load_cfg():
         with open(cfg_path) as fp:
             return json.load(fp)
 
-def find_in_path(path, what_to_find):
+def find_dir_in_path(path, directory_name):
     """Do path look up.
+    Look up is done by joining each element of `path` with `directory_name`
+    If match exists and it's a directory it's returned.
 
-    :return: string. First existing absolute path joining each element of
-    `path` with `what_to_find`
+    :return: string.
     """
 
     for p in path:
-        if os.path.exists(os.path.join(p, what_to_find)):
-            return os.path.join(p, what_to_find)
+        directory_path = os.path.join(p, directory_name)
+        if os.path.exists(directory_path) and os.path.isdir(directory_path):
+            return directory_path
 
 def main():
     args, parser = parse_args()
