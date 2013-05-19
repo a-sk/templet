@@ -91,9 +91,7 @@ def find_in_path(path, what_to_find):
 
 def main():
     args, parser = parse_args()
-    template = 'default'
-    if args['template']:
-        template = args['template']
+    template = args['template'] or 'default'
 
     tempalte_data = {}
     if args['vars']:
