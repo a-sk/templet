@@ -17,10 +17,10 @@ def puts_err(color, msg):
     return _puts_err(msg)
 
 def warning(msg):
-    puts_err('blue', msg)
+    puts_err('blue', 'Warning: ' + msg)
 
 def error(msg):
-    puts_err('red', msg)
+    puts_err('red', 'Error: ' + msg)
     puts_err('red', 'Exiting')
     sys.exit(1)
 
