@@ -124,7 +124,7 @@ def main():
     project_root = os.path.join(os.path.abspath(os.getcwd()), tempalte_data['PROJECT_NAME'])
 
     if not project_template_path:
-        error('Template %s is not found' % template)
+        error('Could not found template %s' % template)
     try:
         templet.handle_project(project_template_path, project_root, tempalte_data)
     except OSError:
