@@ -34,14 +34,30 @@ def parse_vars_from_cli(vars_string):
     return res
 
 def parse_vars_from_file(path):
-    """Get data for tempalte from json file"""
+    """Parse project variables from json file
+
+    :param path: absolute path to json file
+    :return: dict.
+    """
+
     if os.path.exists(path):
         with open(path) as fp:
             return json.load(fp)
     return {}
 
 def get_project_template_path(template):
-    """Find template to copy from"""
+    """Find template directory which template will be copied from.
+
+    Template can be either a name or a full absolute path.  If template is
+    given by name, `get_project_template_path` will try to look up template
+    name in config file.  If there is no config file, it will return None.
+    If template was not defined in config file and was not fould in
+    $PATH, return None.
+
+    :param template: Name or absolute path to template
+    :return: string. Absolute path to template
+    """
+
     if os.path.exists(template):
         return template
     cfg_path = os.path.expandvars('$HOME/.config/templet/config.json')
