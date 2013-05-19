@@ -21,8 +21,10 @@ def parse_args():
 
 def parse_vars_from_cli(vars_string):
     """Parse project variables defined in format 'var=value'
-    :arg: vars - str
-    :return: dict"""
+
+    :param vars: variables to parse
+    :return: dict. Parsed to dict variables
+    """
 
     res = {}
     separate_vars = vars_string.split(',')
