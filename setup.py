@@ -28,7 +28,7 @@ setup(
     name='templet',
     version='0.1.2',
     description='Simple scaffolding tool',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     author='Alexandr Skurikhin',
     author_email='a@skurih.in',
     url='git://skurih.in/templet.git',
