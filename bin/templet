@@ -54,6 +54,9 @@ def get_project_template_path(template):
     If template was not defined in config file and was not fould in
     $PATH, return None.
 
+    If template is given by name and $PATH is defined in config, firstly try to
+    look up template by name, otherwise try to look up template in $PATH.
+
     :param template: Name or absolute path to template
     :return: string. Absolute path to template
     """
