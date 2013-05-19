@@ -11,7 +11,7 @@ import templet
 
 
 def puts_err(color, msg):
-    """Do not colorize output not in terminal"""
+    """Do not colorize output when writing to file or being piped"""
     if sys.stderr.isatty():
         return _puts_err(getattr(colored, color)(msg))
     return _puts_err(msg)
