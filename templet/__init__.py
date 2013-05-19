@@ -19,7 +19,6 @@ def move(src, dst):
     shutil.move(src, dst)
     return dst
 
-
 def expand_template(template_content, template_data):
     """Expand template using jinja2 template engine"""
     return jinja2.Template(template_content).render(template_data)
