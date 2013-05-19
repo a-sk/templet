@@ -78,6 +78,12 @@ def get_project_template_path(template):
                 return template_path
 
 def find_in_path(path, what_to_find):
+    """Do path look up.
+
+    :return: string. First existing absolute path joining each element of
+    `path` with `what_to_find`
+    """
+
     for p in path:
         if os.path.exists(os.path.join(p, what_to_find)):
             return os.path.join(p, what_to_find)
