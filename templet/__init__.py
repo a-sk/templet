@@ -19,12 +19,19 @@ def expand_template(template_content, template_data):
     return jinja2.Template(template_content).render(template_data)
 
 def maybe_rename(src, template_data):
-    """Rename file or directory if it's name contains expandable variable"""
+    """Rename file or directory if it's name contains expandable variables
+    Here we use Jinja2 {{%s}} syntax.
+
+    :return: bool. `True` if rename happend, `False` otherwise.
+    """
+
     if os.path.basename(src).startswith('{{') \
         and os.path.basename(src).endswith('}}'):
 
         new_path = expand_vars_in_file_name(src, template_data)
         shutil.move(src, new_path)
+        return True
+    return False
 
 def expand_vars_in_file(filepath, template_data):
     """Expand variables in file"""
