@@ -125,7 +125,11 @@ def main():
 
     if not project_template_path:
         error('Template %s is not found' % template)
-    templet.handle_project(project_template_path, project_root, tempalte_data)
+    try:
+        templet.handle_project(project_template_path, project_root, tempalte_data)
+    except OSError:
+        error('%s already exists' % project_root)
+
 
 if __name__ == "__main__":
     main()
