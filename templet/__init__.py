@@ -25,10 +25,8 @@ def maybe_rename(src, template_data):
     :return: bool. `True` if rename happend, `False` otherwise.
     """
 
-    if os.path.basename(src).startswith('{{') \
-        and os.path.basename(src).endswith('}}'):
-
-        new_path = expand_vars_in_file_name(src, template_data)
+    new_path = expand_vars_in_file_name(src, template_data)
+    if new_path != src:
         shutil.move(src, new_path)
         return True
     return False
