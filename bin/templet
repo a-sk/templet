@@ -9,6 +9,8 @@ from clint.textui import colored
 # local imports
 import templet
 
+def expandvars(p):
+    return os.path.expanduser(os.path.expandvars(p))
 
 def puts_err(color, msg):
     """Do not colorize output when writing to file or being piped"""
@@ -89,7 +91,7 @@ def get_project_template_path(template):
         return find_dir_in_path(path, template)
 
 def load_cfg():
-    cfg_path = os.path.expandvars('$HOME/.config/templet/config.json')
+    cfg_path = expandvars('$HOME/.config/templet/config.json')
     if os.path.exists(cfg_path):
         with open(cfg_path) as fp:
             return json.load(fp)
@@ -103,7 +105,7 @@ def find_dir_in_path(path, directory_name):
     """
 
     for p in path:
-        directory_path = os.path.join(p, directory_name)
+        directory_path = expandvars(os.path.join(p, directory_name))
         if os.path.exists(directory_path) and os.path.isdir(directory_path):
             return directory_path
 
