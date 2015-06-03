@@ -63,6 +63,12 @@ def parse_vars_from_file(path):
             return json.load(fp)
     return {}
 
+def parse_vars_from_cfg():
+    cfg = load_cfg()
+    if not cfg or 'vars' not in cfg:
+        return {}
+    return cfg['vars']
+
 def get_project_template_path(template):
     """Find template directory which template will be copied from.
 
@@ -114,6 +120,8 @@ def main():
     template = args['template'] or 'default'
 
     tempalte_data = { 'PROJECT_NAME': args['name'] }
+    tempalte_data.update(parse_vars_from_cfg())
+
     if args['vars']:
         try:
             tempalte_data.update(parse_vars_from_cli(args['vars']))
