@@ -1,6 +1,8 @@
 import os
 import jinja2
 import shutil
+from . import utils
+from codecs import open
 
 
 __all__ = ['handle_project']
@@ -31,18 +33,20 @@ def maybe_rename(src, template_data):
         return True
     return False
 
-def expand_vars_in_file(filepath, template_data):
+def expand_vars_in_file(filepath, template_data, ignore_file_list):
     """Expand variables in file"""
-    with open(filepath) as fp:
+    if utils.match(filepath, ignore_file_list):
+        return
+    with open(filepath, encoding='utf8') as fp:
         file_contents = expand_template(fp.read(), template_data)
-    with open(filepath, 'w') as f:
+    with open(filepath, 'w', encoding='utf8') as f:
         f.write(file_contents)
 
 def expand_vars_in_file_name(filepath, template_data):
     """Expand variables in file/directory path"""
     return expand_template(filepath, template_data)
 
-def handle_project(src, dst, template_data):
+def handle_project(src, dst, template_data, ignore_file_list):
     """Main templet library function, does all the work.
 
     First copy template directory to current working path, renaming it
@@ -60,6 +64,6 @@ def handle_project(src, dst, template_data):
         for f in files:
             filepath = os.path.join(root, f)
             if os.path.isfile(filepath):
-                expand_vars_in_file(filepath, template_data)
+                expand_vars_in_file(filepath, template_data, ignore_file_list)
             maybe_rename(filepath, template_data)
 

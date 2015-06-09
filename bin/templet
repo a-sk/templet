@@ -117,6 +117,7 @@ def find_dir_in_path(path, directory_name):
 
 def main():
     args, parser = parse_args()
+    ignore_file_list = ['.*/.git/.*', '.*/.svn/.*', '.*/.hg/.*']
     template = args['template'] or 'default'
 
     tempalte_data = { 'PROJECT_NAME': args['name'] }
@@ -136,7 +137,7 @@ def main():
     if not project_template_path:
         error('Could not found template %s' % template)
     try:
-        templet.handle_project(project_template_path, project_root, tempalte_data)
+        templet.handle_project(project_template_path, project_root, tempalte_data, ignore_file_list)
     except OSError:
         error('%s already exists' % project_root)
 
