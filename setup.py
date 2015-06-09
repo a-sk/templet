@@ -26,7 +26,7 @@ requires = [
 
 setup(
     name='templet',
-    version='0.3.0',
+    version='0.4.0',
     description='Simple scaffolding tool',
     long_description=open('README.rst').read(),
     author='Alexandr Skurikhin',
